@@ -20,6 +20,7 @@ feedback: nssell.2009@gmail.com
 -->
 
 <resources>
-    <string name="hello">Hello World, QuasorMainActivity!</string>
+    <string name="comingsoon">QuasorMainAilmentList Coming Soon</string>
     <string name="app_name">Quasor</string>
+    <string name="main_list_name">Quasor Main List</string>
 </resources>
