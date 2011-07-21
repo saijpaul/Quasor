@@ -17,14 +17,78 @@
 
 package com.saijpaul.quasor;
 
-import android.app.Activity;
+import java.util.ArrayList;
+import android.app.ListActivity;
+import android.content.Context;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.TextView;
+import android.widget.AdapterView.OnItemClickListener;
 
 
-public class QuasorMainAilmentListActivity extends Activity{
+public class QuasorMainAilmentListActivity extends ListActivity{
     
+	private AilmentAdapter ailmentAdapter = null;
+			
+    @Override
 	public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
+	    super.onCreate(savedInstanceState);
+	    setContentView(R.layout.mainailmentlist);
+	    ArrayList<AilmentInfoBean> ailmentList = (ArrayList<AilmentInfoBean>) getIntent().getSerializableExtra(GlobalConstant.AILMENT_ARRAY);
+	    showAilmentList(ailmentList);	    
 	}
+        
+        
+	private void showAilmentList(ArrayList<AilmentInfoBean> ailmentList) {
+				
+		this.ailmentAdapter = new AilmentAdapter(this, R.layout.ailmentlistview, ailmentList);
+		setListAdapter(this.ailmentAdapter);
+        getListView().setTextFilterEnabled(true);
+       
+        getListView().setOnItemClickListener(new OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+              System.out.println("Need to Implement");
+            }
+          });
+        }
+    	
+
+	private class AilmentAdapter extends ArrayAdapter<AilmentInfoBean>{
+
+		public ArrayList<AilmentInfoBean> ailmentArray;
+        public ArrayList<AilmentInfoBean> itemArray;
+        
+        public AilmentAdapter(Context context, int textViewResourceId, ArrayList<AilmentInfoBean> objects) {
+        	    super(context, textViewResourceId, objects);
+                this.ailmentArray = objects;
+                this.itemArray = objects;
+        }
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+        	
+        	View view = convertView;
+                if (view == null) {
+                    LayoutInflater vi = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                    view = vi.inflate(R.layout.ailmentlistview, null);
+                }
+              
+                AilmentInfoBean ailmentInfoBeanObject = ailmentArray.get(position);
+
+            if (ailmentInfoBeanObject != null) {
+                    TextView textview = (TextView) view.findViewById(R.id.text);
+                    
+                    if (textview != null) {
+                    	textview.setText(ailmentInfoBeanObject.getAilmentName());                           
+                    }
+            }
+            
+			
+            return view;
+        } 
+   }
+ 
 }

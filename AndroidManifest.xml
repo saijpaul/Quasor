@@ -36,6 +36,5 @@ feedback: nssell.2009@gmail.com
         <activity android:name=".QuasorMainAilmentListActivity"
                   android:label="@string/main_list_name"/>
         
-
     </application>
 </manifest>
