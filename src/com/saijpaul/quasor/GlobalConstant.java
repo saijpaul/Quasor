@@ -28,6 +28,7 @@ public class GlobalConstant {
 	public static final int VERSION = 1;
 	public static final String TABLE_NAME = "quasor_ailment_remedy";
 	public static final String DATABASE_PATH = "/data/data/com.saijpaul.quasor/databases/";
-	
-	
+	public static final String ACCEPT_BUTTON_TEXT = "I Accept";
+	public static final String DECLINE_BUTTON_TEXT = "I Decline";
+	public static final String DISCLAIMER_TEXT = "DISCLAIMER: message to be updated soon.";
 }

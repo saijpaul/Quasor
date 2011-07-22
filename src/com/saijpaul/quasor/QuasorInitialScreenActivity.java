@@ -18,8 +18,11 @@
 package com.saijpaul.quasor;
 
 import java.util.ArrayList;
+
 import android.util.Log;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -52,10 +55,28 @@ public class QuasorInitialScreenActivity extends Activity {
 	        	         	 
 	        	final Intent msg = new Intent(QuasorInitialScreenActivity.this,QuasorMainAilmentListActivity.class);
 	        	msg.putExtra(GlobalConstant.AILMENT_ARRAY, result);
-	        	QuasorInitialScreenActivity.this.startActivity(msg);
-	        	QuasorInitialScreenActivity.this.finish();
-		    }
-		
+
+	        	AlertDialog.Builder disclaimerMessage = new AlertDialog.Builder(QuasorInitialScreenActivity.this);
+	 
+	        	disclaimerMessage.setMessage(GlobalConstant.DISCLAIMER_TEXT);
+	        	
+	            disclaimerMessage.setPositiveButton(GlobalConstant.ACCEPT_BUTTON_TEXT, new DialogInterface.OnClickListener() {
+	 
+	                 public void onClick(DialogInterface arg, int arg0) {
+	                	 QuasorInitialScreenActivity.this.startActivity(msg);
+	                	 QuasorInitialScreenActivity.this.finish();
+	                }
+	            });
+	 
+	            disclaimerMessage.setNegativeButton(GlobalConstant.DECLINE_BUTTON_TEXT, new DialogInterface.OnClickListener() {
+	 
+	                public void onClick(DialogInterface arg, int arg0) {
+	                	QuasorInitialScreenActivity.this.finish();
+	                }
+	            });
+	 
+	            disclaimerMessage.show();
+		    }		
 	    }
 	    
 	    private ArrayList<AilmentInfoBean> fetchAllAilmentName() {
