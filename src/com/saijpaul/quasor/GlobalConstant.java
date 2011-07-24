@@ -31,4 +31,10 @@ public class GlobalConstant {
 	public static final String ACCEPT_BUTTON_TEXT = "I Accept";
 	public static final String DECLINE_BUTTON_TEXT = "I Decline";
 	public static final String DISCLAIMER_TEXT = "DISCLAIMER: message to be updated soon.";
+	public static final String NUM_OF_AILMENT = "ailNum";
+	public static final String REMEDY_INFO_SCREEN_SQL = "SELECT ailmentNum,ailmentName,ailmentDescription,ailmentImage FROM quasor_ailment_remedy Where ailmentNum=";
+	public static final String COLUMN_NUM = "ailmentNum";
+	public static final String COLUMN_NAME = "ailmentName";
+	public static final String COLUMN_IMAGE = "ailmentImage";
+	public static final String COLUMN_DESCRIPTION = "ailmentDescription";
 }

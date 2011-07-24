@@ -22,7 +22,7 @@ feedback: nssell.2009@gmail.com
 <LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"  android:orientation="horizontal"
   android:layout_width="fill_parent"  android:layout_height="fill_parent" android:gravity="fill">
      
-     <ImageView android:src="@drawable/background" android:id="@+id/backgroundImageView" 
+     <ImageView android:src="@drawable/front" android:id="@+id/backgroundImageView" 
      android:layout_width="fill_parent" android:gravity="fill" android:layout_height="fill_parent"
      android:scaleType="fitXY"/>
             

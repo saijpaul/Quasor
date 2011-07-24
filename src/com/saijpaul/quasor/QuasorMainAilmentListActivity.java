@@ -11,6 +11,7 @@
 * GNU General Public License for more details. You should have
 * received a copy of the GNU General Public License along with this program. 
 * If not, see <http://www.gnu.org/licenses/>.
+
 * Author: Seema Saijpaul
 * Feedback: nssell.2009@gmail.com
 *******************************************************************/
@@ -18,8 +19,10 @@
 package com.saijpaul.quasor;
 
 import java.util.ArrayList;
+
 import android.app.ListActivity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -51,7 +54,12 @@ public class QuasorMainAilmentListActivity extends ListActivity{
        
         getListView().setOnItemClickListener(new OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-              System.out.println("Need to Implement");
+            	
+            	AilmentInfoBean infoBean = (AilmentInfoBean)getListAdapter().getItem(position);
+            	int num = infoBean.getAilmentNum();
+            	Intent msg = new Intent(QuasorMainAilmentListActivity.this,QuasorRemedyDisplayActivity.class);
+            	msg.putExtra(GlobalConstant.NUM_OF_AILMENT, num);
+            	QuasorMainAilmentListActivity.this.startActivity(msg);
             }
           });
         }
