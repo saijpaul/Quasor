@@ -32,7 +32,7 @@ import android.os.Bundle;
 
 public class QuasorInitialScreenActivity extends Activity {
 			
-		private SQLiteDatabase dbInstance = null;
+		private QuasorDBDAO dbDAOObject;
 	    
 	    @Override
 	    public void onCreate(Bundle savedInstanceState) {
@@ -46,7 +46,8 @@ public class QuasorInitialScreenActivity extends Activity {
 	    	@Override
 			protected ArrayList<AilmentInfoBean> doInBackground(String... params) {
 				
-	    		ArrayList<AilmentInfoBean> ailmentArray = fetchAllAilmentName();
+	    		dbDAOObject = new QuasorDBDAO(QuasorInitialScreenActivity.this.getApplicationContext());
+	    		ArrayList<AilmentInfoBean> ailmentArray = dbDAOObject.fetchAllAilmentName();
 	    		return ailmentArray;
 			}
 	    	
@@ -79,36 +80,4 @@ public class QuasorInitialScreenActivity extends Activity {
 		    }		
 	    }
 	    
-	    private ArrayList<AilmentInfoBean> fetchAllAilmentName() {
-
-	    	ArrayList<AilmentInfoBean> ailmentNameArray = new ArrayList<AilmentInfoBean>();
-	    	AilmentInfoBean ailmentInfo = null;
-			try {
-				
-				QuasorDBHelper dbHelper = new QuasorDBHelper(this.getApplicationContext());
-				dbInstance = dbHelper.getWritableDatabase();
-				Cursor cursorAilmentList = dbInstance.rawQuery(GlobalConstant.INITIAL_SCREEN_AILMENT_LIST_SQL , null);
-				
-		    	if (cursorAilmentList != null ) {
-		    		
-		    		if  (cursorAilmentList.moveToFirst()) {
-		    			do {
-		    				int ailmentNum = cursorAilmentList.getInt(cursorAilmentList.getColumnIndex(GlobalConstant.AILMENT_NUM));
-		    				String ailmentName = cursorAilmentList.getString(cursorAilmentList.getColumnIndex(GlobalConstant.AILMENT_NAME));
-		    				ailmentInfo = new AilmentInfoBean();
-		    				ailmentInfo.setAilmentNum(ailmentNum);
-		    				ailmentInfo.setAilmentName(ailmentName);
-		    				ailmentNameArray.add(ailmentInfo);
-		    			}while (cursorAilmentList.moveToNext());
-		    		} 
-		    	}
-		    	cursorAilmentList.close();
-		    	dbInstance.close();
-	        	return ailmentNameArray;
-			} catch (SQLiteException se ) {
-	        	Log.e(getClass().getSimpleName(), "Exception encountered in opening the database.");
-	        	dbInstance.close();
-	        	return null;
-	        }
-		}	
 }
