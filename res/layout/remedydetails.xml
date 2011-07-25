@@ -22,27 +22,13 @@ feedback: nssell.2009@gmail.com
 				android:id="@+id/relativeLayoutMain" android:layout_width="fill_parent" 
 				android:layout_height="fill_parent" android:gravity="fill"
 				android:background="@drawable/back">
-<RelativeLayout android:id="@+id/headerLayout" android:layout_height="wrap_content" android:background="@drawable/footer" 
+<RelativeLayout android:id="@+id/headerLayout" android:layout_height="wrap_content" android:background="@drawable/header" 
 				android:padding="8dip" android:paddingBottom="8dip" android:paddingLeft="8dip" android:paddingRight="8dip" 
 				android:paddingTop="8dip" android:layout_width="wrap_content" android:layout_alignParentTop="true">
-<TextView
-        android:text="Header Text"
-        android:textColor="#eef112" 
-        android:textSize="18dip"
-        android:typeface="sans"
-        android:textStyle="bold" 
-        android:layout_width="wrap_content" 
-		android:layout_height="wrap_content"
-		android:shadowColor="#00ccff"  
-        android:shadowRadius="1.5"  
-        android:shadowDx="1"  
-        android:shadowDy="1" 
-		android:layout_centerHorizontal="true"/>
-
 <ImageView
   	  android:id="@+id/imageHome"
 	  android:layout_width="50dip"
-	  android:layout_height="50dip" android:src="@drawable/home" android:layout_alignParentLeft="true" />
+	  android:layout_height="50dip"  android:src="@drawable/home" android:layout_alignParentLeft="true" />
 
 </RelativeLayout>
 
@@ -91,19 +77,6 @@ feedback: nssell.2009@gmail.com
 <RelativeLayout android:id="@+id/footerLayout" android:layout_height="wrap_content" android:background="@drawable/footer" 
 				android:padding="8dip" android:paddingBottom="8dip" android:paddingLeft="8dip" android:paddingRight="8dip" 
 				android:paddingTop="8dip" android:layout_width="wrap_content" android:layout_alignParentBottom="true">
-<TextView
-        android:text="Footer Text"
-        android:textColor="#eef112" 
-        android:textSize="18dip"
-        android:typeface="sans"
-        android:textStyle="bold" 
-        android:layout_width="wrap_content" 
-		android:layout_height="wrap_content"
-		android:shadowColor="#00ccff"  
-        android:shadowRadius="1.5"  
-        android:shadowDx="1"  
-        android:shadowDy="1" 
-		android:layout_centerHorizontal="true"/>
 		
 </RelativeLayout>
 </RelativeLayout>

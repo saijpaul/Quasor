@@ -65,13 +65,13 @@ public class QuasorRemedyDisplayActivity extends Activity{
             this.largeFont = (TextView)this.findViewById(R.id.largetextView);
             this.remedyFont = (TextView)this.findViewById(R.id.remedyDesctextView);
             
-            smallFont.setOnClickListener(myListener);
-            mediumFont.setOnClickListener(myListener);
-            largeFont.setOnClickListener(myListener);
-            homeImage.setOnClickListener(myListener);
+            smallFont.setOnClickListener(clickListener);
+            mediumFont.setOnClickListener(clickListener);
+            largeFont.setOnClickListener(clickListener);
+            homeImage.setOnClickListener(clickListener);
         }
         
-        View.OnClickListener myListener = new View.OnClickListener(){
+        View.OnClickListener clickListener = new View.OnClickListener(){
             public void  onClick  (View  v){
             	switch(v.getId()){
             	
