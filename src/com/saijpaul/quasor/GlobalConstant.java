@@ -37,4 +37,5 @@ public class GlobalConstant {
 	public static final String COLUMN_NAME = "ailmentName";
 	public static final String COLUMN_IMAGE = "ailmentImage";
 	public static final String COLUMN_DESCRIPTION = "ailmentDescription";
+	public static final String REMEDY_COUNT = "countR";
 }

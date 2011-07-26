@@ -24,6 +24,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.Html;
 
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -45,6 +46,7 @@ public class QuasorMainAilmentListActivity extends ListActivity{
 	private ImageView filterImage = null;
 	private EditText textFilter = null;
 	TextWatcher textFilterWatcher = null;
+	private ImageView shareRemedy;
 	
     @Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -54,7 +56,10 @@ public class QuasorMainAilmentListActivity extends ListActivity{
 	    showAilmentList(ailmentList);
 	    
 	    this.filterImage = (ImageView)this.findViewById(R.id.imageOK);
+	    this.shareRemedy = (ImageView)this.findViewById(R.id.imageShareApp);
+	    
 	    filterImage.setOnClickListener(clickListener);
+	    shareRemedy.setOnClickListener(clickListener);
 	    
 	    textFilter = (EditText) findViewById(R.id.searchbox);
 	    textFilter.addTextChangedListener(textFilterWatcher);
@@ -68,6 +73,14 @@ public class QuasorMainAilmentListActivity extends ListActivity{
 	    		
 	    		InputMethodManager iMethodMgr = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
 	    		iMethodMgr.hideSoftInputFromWindow(textFilter.getWindowToken(), 0);
+	    		break;
+	    	case R.id.imageShareApp:
+	    		
+	    		Intent shareAppIntent = new Intent(Intent.ACTION_SEND);
+	    		shareAppIntent.setType("text/html");
+	    		shareAppIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Hey, Try this app regarding simple home remedies");
+	    		shareAppIntent.putExtra(android.content.Intent.EXTRA_TEXT, Html.fromHtml("<p>Try this app: [Market link]</p>"));
+	    		startActivity(Intent.createChooser(shareAppIntent,"Email to Family/Friend"));
 	    		break;
 	    	}	
         }
@@ -86,6 +99,7 @@ public class QuasorMainAilmentListActivity extends ListActivity{
             	int num = infoBean.getAilmentNum();
             	Intent msg = new Intent(QuasorMainAilmentListActivity.this,QuasorRemedyDisplayActivity.class);
             	msg.putExtra(GlobalConstant.NUM_OF_AILMENT, num);
+            	msg.putExtra(GlobalConstant.REMEDY_COUNT, getListAdapter().getCount());
             	QuasorMainAilmentListActivity.this.startActivity(msg);
             }
           });

@@ -29,6 +29,12 @@ feedback: nssell.2009@gmail.com
   	  android:id="@+id/imageHome"
 	  android:layout_width="50dip"
 	  android:layout_height="50dip"  android:src="@drawable/home" android:layout_alignParentLeft="true" />
+	  
+<ImageView
+  	  android:id="@+id/imageShareRemedy"
+	  android:layout_width="50dip"
+	  android:layout_height="50dip"  android:src="@drawable/mail" android:layout_alignParentRight="true" />
+	  
 
 </RelativeLayout>
 
@@ -77,6 +83,21 @@ feedback: nssell.2009@gmail.com
 <RelativeLayout android:id="@+id/footerLayout" android:layout_height="wrap_content" android:background="@drawable/footer" 
 				android:padding="8dip" android:paddingBottom="8dip" android:paddingLeft="8dip" android:paddingRight="8dip" 
 				android:paddingTop="8dip" android:layout_width="wrap_content" android:layout_alignParentBottom="true">
+
+<ImageView
+  	  android:id="@+id/imageNext"
+	  android:layout_width="50dip"
+	  android:layout_height="50dip" android:src="@drawable/right" android:layout_alignParentRight="true" />
+
+<ImageView
+  	  android:id="@+id/imageFavoriteAdd"
+	  android:layout_width="50dip"
+	  android:layout_height="50dip" android:src="@drawable/fav_add" android:layout_centerHorizontal="true" />
+
+<ImageView
+  	  android:id="@+id/imagePrevious"
+	  android:layout_width="50dip"
+	  android:layout_height="50dip" android:src="@drawable/left" android:layout_alignParentLeft="true" />
 		
 </RelativeLayout>
 </RelativeLayout>

@@ -45,9 +45,7 @@ public class QuasorDBDAO {
 	
 	public QuasorDBHelper getDBHelperInstance(){
 	
-		System.out.println("value of"+dbHelper);
 		if(dbHelper == null){
-			System.out.println("came here which i dont want");
 			dbHelper = new QuasorDBHelper(currContext);
 		}
 		

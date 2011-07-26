@@ -23,10 +23,12 @@ import java.io.FileInputStream;
 import java.util.StringTokenizer;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -40,12 +42,16 @@ public class QuasorRemedyDisplayActivity extends Activity{
 	String ailmentDescription=null;
 	String ailmentImage=null;
 	String ailmentAllInfo = null;
-	int    ailmentNum;
+	int ailmentNum;
     private ImageView homeImage;
     private TextView  smallFont; 
     private TextView  mediumFont;
     private TextView  largeFont;
     private TextView  remedyFont;
+    private ImageView remedyPrevious;
+    private ImageView remedyNext;
+    private ImageView shareRemedy;
+    private int countRemedy = -1;
        
     
     @Override
@@ -54,6 +60,7 @@ public class QuasorRemedyDisplayActivity extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.remedydetails);
         int numAil = getIntent().getIntExtra(GlobalConstant.NUM_OF_AILMENT,0);
+        countRemedy = getIntent().getIntExtra(GlobalConstant.REMEDY_COUNT,0);
         
         dbDAOObject = new QuasorDBDAO(this.getApplicationContext());
         ailmentAllInfo = dbDAOObject.fetchRemedyOfSelectedAilment(numAil);
@@ -70,6 +77,9 @@ public class QuasorRemedyDisplayActivity extends Activity{
         showRemedyInfo(ailmentName,ailmentDescription,ailmentImage);
     	
         this.homeImage = (ImageView)this.findViewById(R.id.imageHome);
+        this.remedyPrevious = (ImageView)this.findViewById(R.id.imagePrevious);
+        this.remedyNext = (ImageView)this.findViewById(R.id.imageNext);
+        this.shareRemedy = (ImageView)this.findViewById(R.id.imageShareRemedy);
        
         this.smallFont = (TextView)this.findViewById(R.id.smalltextView);
         this.mediumFont = (TextView)this.findViewById(R.id.mediumtextView);
@@ -80,6 +90,9 @@ public class QuasorRemedyDisplayActivity extends Activity{
         mediumFont.setOnClickListener(clickListener);
         largeFont.setOnClickListener(clickListener);
         homeImage.setOnClickListener(clickListener);
+        remedyPrevious.setOnClickListener(clickListener);
+        remedyNext.setOnClickListener(clickListener);
+        shareRemedy.setOnClickListener(clickListener);
      }
         
     View.OnClickListener clickListener = new View.OnClickListener(){
@@ -100,6 +113,51 @@ public class QuasorRemedyDisplayActivity extends Activity{
 	    		break;
 	    	case R.id.imageHome:
 	    		finish();
+	    		break;
+	    	case R.id.imageNext:
+	    		remedyNext.setFocusable(true);
+	    		if(countRemedy!=ailmentNum){
+	    			
+	    			ailmentAllInfo = dbDAOObject.fetchRemedyOfSelectedAilment(ailmentNum+1);
+	    	        
+	    	        StringTokenizer tokenizer = new StringTokenizer(ailmentAllInfo,"~");
+	    	        while(tokenizer.hasMoreTokens()){	    	            
+	    	        	ailmentNum = Integer.parseInt(tokenizer.nextToken());
+	    	        	ailmentName = tokenizer.nextToken();
+	    	        	ailmentDescription = tokenizer.nextToken();
+	    	        	ailmentImage = tokenizer.nextToken();
+	    	        }    	    	        
+	    	        showRemedyInfo(ailmentName,ailmentDescription,ailmentImage);	    			
+	    		}
+	    		else{
+	    			remedyNext.setFocusable(false);;
+	    		}
+	    		    		
+	    		break;
+	    	case R.id.imagePrevious:
+	    		remedyPrevious.setFocusable(true);
+	    		if(ailmentNum!=0){
+	    			ailmentAllInfo = dbDAOObject.fetchRemedyOfSelectedAilment(ailmentNum-1);
+	    	        
+	    	        StringTokenizer tokenizer = new StringTokenizer(ailmentAllInfo,"~");
+	    	        while(tokenizer.hasMoreTokens()){	    	            
+	    	        	ailmentNum = Integer.parseInt(tokenizer.nextToken());
+	    	        	ailmentName = tokenizer.nextToken();
+	    	        	ailmentDescription = tokenizer.nextToken();
+	    	        	ailmentImage = tokenizer.nextToken();
+	    	        }    	    	        
+	    	        showRemedyInfo(ailmentName,ailmentDescription,ailmentImage);	    		}
+	    		else{
+	    			remedyPrevious.setFocusable(false);
+	    		}   	    		
+	    		break;
+	    	case R.id.imageShareRemedy:
+	    		
+	    		Intent shareRemedyIntent = new Intent(android.content.Intent.ACTION_SEND);
+	    		shareRemedyIntent.setType("text/html");
+	    		shareRemedyIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,"Remedy For: "+ailmentName);
+	    		shareRemedyIntent.putExtra(android.content.Intent.EXTRA_TEXT, Html.fromHtml("<p>"+ailmentDescription+"</p>"));
+	    		startActivity(Intent.createChooser(shareRemedyIntent, "Email to Family/Friend"));
 	    		break;
         	}	
         }
