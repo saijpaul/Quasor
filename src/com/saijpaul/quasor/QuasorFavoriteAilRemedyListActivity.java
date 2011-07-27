@@ -1,5 +1,5 @@
 /*******************************************************************
-* Copyright© 2011 Seema Saijpaul 
+* Copyright© 2011 Seema Saijpaul
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
 * the Free Software Foundation, either version 3 of the License, or
@@ -24,116 +24,120 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.Html;
-
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Toast;
 
-public class QuasorMainAilmentListActivity extends ListActivity{
+
+public class QuasorFavoriteAilRemedyListActivity extends ListActivity{
     
 	private AilmentAdapter ailmentAdapter = null;
+	private ImageView homeImage = null;
+	private ImageView removeFavoriteImage = null;
 	private ImageView filterImage = null;
 	private EditText textFilter = null;
 	TextWatcher textFilterWatcher = null;
-	private ImageView shareRemedy;
-	private ImageView favoriteRemedyList;
+	private CheckBox checkToRemove;
+	ArrayList<Integer> removeResults = new ArrayList<Integer>();
+    private QuasorDBDAO dbDAOObject;
+    
 	
     @Override
-	public void onCreate(Bundle savedInstanceState) {
-	    super.onCreate(savedInstanceState);
-	    setContentView(R.layout.mainailmentlist);
-	    ArrayList<AilmentInfoBean> ailmentList = (ArrayList<AilmentInfoBean>) getIntent().getSerializableExtra(GlobalConstant.AILMENT_ARRAY);
-	    showAilmentList(ailmentList);
-	    
-	    this.filterImage = (ImageView)this.findViewById(R.id.imageOK);
-	    this.shareRemedy = (ImageView)this.findViewById(R.id.imageShareApp);
-	    this.favoriteRemedyList = (ImageView)this.findViewById(R.id.imageFavoriteFolder);
-	    
-	    filterImage.setOnClickListener(clickListener);
-	    shareRemedy.setOnClickListener(clickListener);
-	    favoriteRemedyList.setOnClickListener(clickListener);
-	    
-	    textFilter = (EditText) findViewById(R.id.searchbox);
-	    textFilter.addTextChangedListener(textFilterWatcher);
-	}
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.favoriteailmentlist);
+        dbDAOObject = new QuasorDBDAO(this.getApplicationContext());
+        ArrayList<AilmentInfoBean> favList = dbDAOObject.fetchAllFavoriteAilmentName();
+        showFavoriteAilmentList(favList);
         
+        this.homeImage = (ImageView)this.findViewById(R.id.imageHome);
+        this.removeFavoriteImage = (ImageView)this.findViewById(R.id.imageFavoriteRemove);
+        this.filterImage = (ImageView)this.findViewById(R.id.imageOK);                
+        this.textFilter = (EditText) findViewById(R.id.searchbox);
+        
+        textFilter.addTextChangedListener(textFilterWatcher);
+        removeFavoriteImage.setOnClickListener(clickListener);
+        homeImage.setOnClickListener(clickListener);
+        filterImage.setOnClickListener(clickListener);
+    }
+    
     View.OnClickListener clickListener = new View.OnClickListener(){
         public void  onClick  (View  v){
-        	switch(v.getId()){
-        	
-	    	case R.id.imageOK:	    		
-	    		InputMethodManager iMethodMgr = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-	    		iMethodMgr.hideSoftInputFromWindow(textFilter.getWindowToken(), 0);
+        	switch(v.getId()){     	
+	    	
+	    	case R.id.imageOK:
+	    		InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+	    		imm.hideSoftInputFromWindow(textFilter.getWindowToken(), 0);	    		
 	    		break;
-	    	case R.id.imageShareApp:	    		
-	    		Intent shareAppIntent = new Intent(Intent.ACTION_SEND);
-	    		shareAppIntent.setType("text/html");
-	    		shareAppIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Hey, Try this app regarding simple home remedies");
-	    		shareAppIntent.putExtra(android.content.Intent.EXTRA_TEXT, Html.fromHtml("<p>Try this app: [Market link]</p>"));
-	    		startActivity(Intent.createChooser(shareAppIntent,"Email to Family/Friend"));
+	    	case R.id.imageHome:
+	    		finish();		
 	    		break;
-	    	case R.id.imageFavoriteFolder:	    		
-	    		Intent msg = new Intent(QuasorMainAilmentListActivity.this,QuasorFavoriteAilRemedyListActivity.class);
-	    		QuasorMainAilmentListActivity.this.startActivity(msg);
-	    		break;
-	    	}	
+	    	case R.id.imageFavoriteRemove:
+	    		boolean bRes = dbDAOObject.removeRemedyAsFavorite(removeResults);
+	    		if(bRes==true){
+	    			Toast.makeText(getApplicationContext(), "The selected remedy/remedies have been successfully removed from your favorite remedy list.", 
+	    					Toast.LENGTH_LONG).show();
+	    		}
+	    		finish();
+	    		break;	    		
+        	}	
         }
     };
     
-	private void showAilmentList(ArrayList<AilmentInfoBean> ailmentList) {
-				
-		this.ailmentAdapter = new AilmentAdapter(this, R.layout.ailmentlistview, ailmentList);
-		setListAdapter(this.ailmentAdapter);
+    
+	private void showFavoriteAilmentList(ArrayList<AilmentInfoBean> favAilmentList) {
+		this.ailmentAdapter = new AilmentAdapter(this, R.layout.favoriteaillistview, favAilmentList);
+	    setListAdapter(this.ailmentAdapter);
         getListView().setTextFilterEnabled(true);
-       
+    
         getListView().setOnItemClickListener(new OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            	
-            	AilmentInfoBean infoBean = (AilmentInfoBean)getListAdapter().getItem(position);
-            	int num = infoBean.getAilmentNum();
-            	Intent msg = new Intent(QuasorMainAilmentListActivity.this,QuasorRemedyDisplayActivity.class);
-            	msg.putExtra(GlobalConstant.NUM_OF_AILMENT, num);
-            	msg.putExtra(GlobalConstant.REMEDY_COUNT, getListAdapter().getCount());
-            	msg.putExtra(GlobalConstant.ALL_OR_FAVORITE, GlobalConstant.ALL);
-            	QuasorMainAilmentListActivity.this.startActivity(msg);
+
+            	AilmentInfoBean aInfo = (AilmentInfoBean)getListAdapter().getItem(position);
+            	Intent msg = new Intent(QuasorFavoriteAilRemedyListActivity.this,QuasorRemedyDisplayActivity.class);
+            	msg.putExtra(GlobalConstant.NUM_OF_AILMENT, aInfo.getAilmentNum());
+            	msg.putExtra(GlobalConstant.ALL_OR_FAVORITE, GlobalConstant.FAVORITE);
+            	QuasorFavoriteAilRemedyListActivity.this.startActivity(msg);
             }
           });
         
         textFilterWatcher = new TextWatcher() {
         	
-           public void onTextChanged(CharSequence s, int start, int before,
-                    int count) {
-            	ailmentAdapter.getFilter().filter(s);
-            	ailmentAdapter.notifyDataSetChanged();
-         
-            }
+            public void onTextChanged(CharSequence s, int start, int before,
+                     int count) {
+             	ailmentAdapter.getFilter().filter(s);
+             	ailmentAdapter.notifyDataSetChanged();
+          
+             }
 
-			@Override
-			public void afterTextChanged(Editable s) {
-				// TODO Auto-generated method stub
-				
-			}
-	
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count,
-					int after) {
-				// TODO Auto-generated method stub
-				
-			}
-        };
-
-	}
+ 			@Override
+ 			public void afterTextChanged(Editable s) {
+ 				// TODO Auto-generated method stub
+ 				
+ 			}
+ 	
+ 			@Override
+ 			public void beforeTextChanged(CharSequence s, int start, int count,
+ 					int after) {
+ 				// TODO Auto-generated method stub
+ 				
+ 			}
+         };
+            
+    }
     	
 
 	private class AilmentAdapter extends ArrayAdapter<AilmentInfoBean> implements Filterable{
@@ -155,20 +159,37 @@ public class QuasorMainAilmentListActivity extends ListActivity{
         	View view = convertView;
                 if (view == null) {
                     LayoutInflater vi = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                    view = vi.inflate(R.layout.ailmentlistview, null);
+                    view = vi.inflate(R.layout.favoriteaillistview, null);
                 }
               
                 AilmentInfoBean ailmentInfoBeanObject = ailmentArray.get(position);
-
-            if (ailmentInfoBeanObject != null) {
+                if (ailmentInfoBeanObject != null) {
                     TextView textview = (TextView) view.findViewById(R.id.text);
                     
                     if (textview != null) {
                     	textview.setText(ailmentInfoBeanObject.getAilmentName());                           
                     }
-            }
-            
-			
+                }
+                
+                checkToRemove = (CheckBox) view.findViewById(R.id.checkBoxFav);
+                final AilmentInfoBean removeFavAilment = ailmentArray.get(position);
+                checkToRemove.setOnClickListener(new OnClickListener() {
+                    public void onClick(View v) {
+                      
+                        if (((CheckBox) v).isChecked()) {
+                             removeResults.add(removeFavAilment.getAilmentNum());
+                        }
+                        else{
+                        	for(int k =0; k< removeResults.size();k++){
+                				Integer num = removeResults.get(k);
+                				if(num==removeFavAilment.getAilmentNum()){
+                					removeResults.remove(num);
+                				}                				
+                			}
+                        }                        
+                    }
+                });
+                
             return view;
         }
         
@@ -198,7 +219,7 @@ public class QuasorMainAilmentListActivity extends ListActivity{
             }
             return ailmentFilter;
         }
-        
+    
         private class AilmentsFilter extends Filter {
             
         	protected FilterResults performFiltering(CharSequence cs) {
@@ -242,11 +263,9 @@ public class QuasorMainAilmentListActivity extends ListActivity{
  
                 return filteredAilmentRes;
             }
- 
-            protected void publishResults(CharSequence cs, FilterResults filterRes) {
-                
-            	ailmentArray = (ArrayList<AilmentInfoBean>) filterRes.values;
-           
+        	
+        	protected void publishResults(CharSequence cs, FilterResults filterRes) {
+              	ailmentArray = (ArrayList<AilmentInfoBean>) filterRes.values;
                 if (filterRes.count > 0) {
                     notifyDataSetChanged();
                 } else {
@@ -256,10 +275,9 @@ public class QuasorMainAilmentListActivity extends ListActivity{
         }
 
    }
-	
 	@Override
     protected void onDestroy() {
         super.onDestroy();
         textFilter.removeTextChangedListener(textFilterWatcher);
-	}
+	}          
 }

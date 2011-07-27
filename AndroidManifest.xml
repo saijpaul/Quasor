@@ -40,5 +40,8 @@ feedback: nssell.2009@gmail.com
         <activity android:name=".QuasorRemedyDisplayActivity"
                   android:label="@string/remedy_screen"
                   android:theme="@android:style/Theme.NoTitleBar"/>
+        <activity android:name=".QuasorFavoriteAilRemedyListActivity"
+                  android:label="@string/remedy_screen"
+                  android:theme="@android:style/Theme.NoTitleBar"/>
     </application>
 </manifest>

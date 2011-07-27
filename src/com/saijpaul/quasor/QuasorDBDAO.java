@@ -18,7 +18,6 @@
 package com.saijpaul.quasor;
 
 import java.util.ArrayList;
-
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -57,7 +56,7 @@ public class QuasorDBDAO {
     	ArrayList<AilmentInfoBean> ailmentNameArray = new ArrayList<AilmentInfoBean>();
     	AilmentInfoBean ailmentInfo = null;
 		try {
-				dbInstance = getDBHelperInstance().getWritableDatabase();
+			dbInstance = getDBHelperInstance().getWritableDatabase();
 			Cursor cursorAilmentList = dbInstance.rawQuery(GlobalConstant.INITIAL_SCREEN_AILMENT_LIST_SQL , null);
 			
 	    	if (cursorAilmentList != null ) {
@@ -77,7 +76,7 @@ public class QuasorDBDAO {
 	    	dbInstance.close();
         	return ailmentNameArray;
 		} catch (SQLiteException se ) {
-        	Log.e(getClass().getSimpleName(), "Exception encountered in opening the database.");
+        	Log.e(getClass().getSimpleName(), GlobalConstant.SQL_EXCEPTION_MESSAGE);
         	dbInstance.close();
         	return null;
         }
@@ -103,9 +102,75 @@ public class QuasorDBDAO {
 			dbInstance.close();
 			return ailmentAllInfo;
 		} catch (SQLiteException se ) {
-        	Log.e(getClass().getSimpleName(), "Exception encountered in opening the database.");
+        	Log.e(getClass().getSimpleName(), GlobalConstant.SQL_EXCEPTION_MESSAGE);
         	dbInstance.close();
         	return null;
         }
+	}
+    public boolean addRemedyAsFavorite(int ailmentnum) {
+		try {
+			dbInstance = getDBHelperInstance().getWritableDatabase();
+			int favoriteVal = GlobalConstant.FAVORITE_REMEDY_YES;
+			String UPDATE_SQL = GlobalConstant.UPDATE_FAVORITE_VALUE_FIRST_PART+favoriteVal+GlobalConstant.UPDATE_FAVORITE_VALUE_SECOND_PART+ailmentNum;
+			dbInstance.execSQL(UPDATE_SQL);
+			dbInstance.close();
+			return true;
+		} catch (SQLiteException se ) {
+			Log.e(getClass().getSimpleName(), GlobalConstant.SQL_EXCEPTION_MESSAGE);
+			return false;
+        } 
+	}
+    
+    public ArrayList<AilmentInfoBean> fetchAllFavoriteAilmentName() {
+    	
+    	ArrayList<AilmentInfoBean> ailmentNameArray = new ArrayList<AilmentInfoBean>();
+    	AilmentInfoBean ailmentInfo = null;
+		try {
+			
+			dbInstance = getDBHelperInstance().getWritableDatabase();
+			Cursor cursorFavoriteAilment = dbInstance.rawQuery(GlobalConstant.FAVORITE_AILMENT_LIST_SQL , null);
+			
+	    	if (cursorFavoriteAilment != null ) {
+	    		
+	    		if  (cursorFavoriteAilment.moveToFirst()) {
+	    			do {  				
+	    				int ailmentNum = cursorFavoriteAilment.getInt(cursorFavoriteAilment.getColumnIndex(GlobalConstant.AILMENT_NUM));
+	    				String ailmentName = cursorFavoriteAilment.getString(cursorFavoriteAilment.getColumnIndex(GlobalConstant.AILMENT_NAME));
+	    				
+	    				ailmentInfo = new AilmentInfoBean();
+	    				ailmentInfo.setAilmentNum(ailmentNum);
+	    				ailmentInfo.setAilmentName(ailmentName);
+	    				ailmentNameArray.add(ailmentInfo);
+	    			}while (cursorFavoriteAilment.moveToNext());
+	    		} 
+	    	}
+	    	cursorFavoriteAilment.close();
+	    	dbInstance.close();
+	    	return ailmentNameArray;
+		} catch (SQLiteException se ) {
+        	Log.e(getClass().getSimpleName(), GlobalConstant.SQL_EXCEPTION_MESSAGE);
+        	dbInstance.close();
+        	return null;
+        }
+
+	}
+    public boolean removeRemedyAsFavorite(ArrayList<Integer> removeFavorite) {
+		try {
+			dbInstance = getDBHelperInstance().getWritableDatabase();
+			int notFavoriteVal = GlobalConstant.FAVORITE_REMEDY_NO;
+			String UPDATE_SQL = null;
+			
+			for(int k =0; k< removeFavorite.size();k++){
+				Integer num = removeFavorite.get(k);
+				UPDATE_SQL = GlobalConstant.UPDATE_FAVORITE_VALUE_FIRST_PART+notFavoriteVal+GlobalConstant.UPDATE_FAVORITE_VALUE_SECOND_PART+num;
+				dbInstance.execSQL(UPDATE_SQL);
+			}			
+			dbInstance.close();
+			return true;
+		} catch (SQLiteException se ) {
+			Log.e(getClass().getSimpleName(), GlobalConstant.SQL_EXCEPTION_MESSAGE);
+			dbInstance.close();
+			return false;
+        } 
 	}
 }

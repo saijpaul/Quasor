@@ -38,4 +38,13 @@ public class GlobalConstant {
 	public static final String COLUMN_IMAGE = "ailmentImage";
 	public static final String COLUMN_DESCRIPTION = "ailmentDescription";
 	public static final String REMEDY_COUNT = "countR";
+	public static final int FAVORITE_REMEDY_YES = 11;
+	public static final int FAVORITE_REMEDY_NO = 00;
+	public static final String UPDATE_FAVORITE_VALUE_FIRST_PART = "UPDATE quasor_ailment_remedy SET favoriteRemedy =";
+	public static final String UPDATE_FAVORITE_VALUE_SECOND_PART = " WHERE ailmentNum =";
+	public static final String FAVORITE_AILMENT_LIST_SQL = "SELECT ailmentNum,ailmentName FROM quasor_ailment_remedy where favoriteRemedy=11";
+	public static final String SQL_EXCEPTION_MESSAGE = "Exception encountered in opening the database or executing the query";
+	public static final String ALL_OR_FAVORITE = "AllOrFavorite";
+	public static final String FAVORITE = "Favorite";
+	public static final String ALL = "All";
 }
