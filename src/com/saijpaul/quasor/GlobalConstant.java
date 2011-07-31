@@ -30,7 +30,13 @@ public class GlobalConstant {
 	public static final String DATABASE_PATH = "/data/data/com.saijpaul.quasor/databases/";
 	public static final String ACCEPT_BUTTON_TEXT = "I Accept";
 	public static final String DECLINE_BUTTON_TEXT = "I Decline";
-	public static final String DISCLAIMER_TEXT = "DISCLAIMER: message to be updated soon.";
+	public static final String DISCLAIMER_TEXT = "DISCLAIMER: This Application is built for educational/informational purposes" +
+												 " only and Author takes no responsibility for any of the content in the application " +
+												 "and is no way responsible for any impact caused physically or otherwise to the end " +
+												 "user. All medical ailments needs to be treated by trained medical professional only " +
+												 "and this application is not a substitute for professional treatment/medication.The " +
+												 "remedies contained herein are not FDA approved. This software is provided 'AS IS' and " +
+												 "developer assumes no liability for any consequences arising out of usage of software. ";
 	public static final String NUM_OF_AILMENT = "ailNum";
 	public static final String REMEDY_INFO_SCREEN_SQL = "SELECT ailmentNum,ailmentName,ailmentDescription,ailmentImage FROM quasor_ailment_remedy Where ailmentNum=";
 	public static final String COLUMN_NUM = "ailmentNum";

@@ -154,8 +154,8 @@ public class QuasorMainAilmentListActivity extends ListActivity{
         	
         	View view = convertView;
                 if (view == null) {
-                    LayoutInflater vi = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                    view = vi.inflate(R.layout.ailmentlistview, null);
+                    LayoutInflater inflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                    view = inflater.inflate(R.layout.ailmentlistview, null);
                 }
               
                 AilmentInfoBean ailmentInfoBeanObject = ailmentArray.get(position);

@@ -18,15 +18,14 @@
 package com.saijpaul.quasor;
 
 import java.util.ArrayList;
-
-import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.TextView;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteException;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
@@ -57,27 +56,39 @@ public class QuasorInitialScreenActivity extends Activity {
 	        	final Intent msg = new Intent(QuasorInitialScreenActivity.this,QuasorMainAilmentListActivity.class);
 	        	msg.putExtra(GlobalConstant.AILMENT_ARRAY, result);
 
-	        	AlertDialog.Builder disclaimerMessage = new AlertDialog.Builder(QuasorInitialScreenActivity.this);
-	 
-	        	disclaimerMessage.setMessage(GlobalConstant.DISCLAIMER_TEXT);
+	        	AlertDialog.Builder disclaimerMessage;
+	        	AlertDialog alertDialog;
+	        
+	        	LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+	        	View layout = inflater.inflate(R.layout.disclaimerdialog,null);
+
+	        	TextView disclaimerText = (TextView) layout.findViewById(R.id.disclaimerText);
+	        	disclaimerText.setText(GlobalConstant.DISCLAIMER_TEXT);
+	        	Button agreeButton = (Button) layout.findViewById(R.id.agreebt);
+	        	Button disagreeButton = (Button) layout.findViewById(R.id.disagreebt);
+	        	agreeButton.setText(GlobalConstant.ACCEPT_BUTTON_TEXT);
+	        	disagreeButton.setText(GlobalConstant.DECLINE_BUTTON_TEXT);
+	        		            
+	        	agreeButton.setOnClickListener(new OnClickListener(){
+							@Override
+							public void onClick(View v) {
+								QuasorInitialScreenActivity.this.startActivity(msg);
+			                	 QuasorInitialScreenActivity.this.finish();								
+							}	        		
+	        	});
 	        	
-	            disclaimerMessage.setPositiveButton(GlobalConstant.ACCEPT_BUTTON_TEXT, new DialogInterface.OnClickListener() {
-	 
-	                 public void onClick(DialogInterface arg, int arg0) {
-	                	 QuasorInitialScreenActivity.this.startActivity(msg);
-	                	 QuasorInitialScreenActivity.this.finish();
-	                }
-	            });
-	 
-	            disclaimerMessage.setNegativeButton(GlobalConstant.DECLINE_BUTTON_TEXT, new DialogInterface.OnClickListener() {
-	 
-	                public void onClick(DialogInterface arg, int arg0) {
-	                	QuasorInitialScreenActivity.this.finish();
-	                }
-	            });
-	 
-	            disclaimerMessage.show();
+	        	disagreeButton.setOnClickListener(new OnClickListener(){
+	        				@Override
+							public void onClick(View v) {
+					           	 QuasorInitialScreenActivity.this.finish();								
+							}      		
+	        	});
+
+	        	disclaimerMessage = new AlertDialog.Builder(QuasorInitialScreenActivity.this);
+	        	disclaimerMessage.setView(layout);
+	        	alertDialog = disclaimerMessage.create();
+	        	alertDialog.getWindow().setLayout(80, 50);
+	        	alertDialog.show();
 		    }		
-	    }
-	    
+	    }	    	    
 }

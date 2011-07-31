@@ -180,7 +180,7 @@ public class QuasorRemedyDisplayActivity extends Activity{
 	    		boolean bResult =(boolean) dbDAOObject.addRemedyAsFavorite(ailmentNum);
 	    		if(bResult==true){
 	    			Toast.makeText(getApplicationContext(), "This remedy has been successfully stored in your favorite remedy list.", 
-	    					Toast.LENGTH_LONG).show();
+	    					Toast.LENGTH_SHORT).show();
 	    		}	    		
 	    		break;
         	}	

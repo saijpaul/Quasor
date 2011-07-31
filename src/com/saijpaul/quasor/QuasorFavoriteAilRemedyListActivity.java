@@ -89,7 +89,7 @@ public class QuasorFavoriteAilRemedyListActivity extends ListActivity{
 	    		boolean bRes = dbDAOObject.removeRemedyAsFavorite(removeResults);
 	    		if(bRes==true){
 	    			Toast.makeText(getApplicationContext(), "The selected remedy/remedies have been successfully removed from your favorite remedy list.", 
-	    					Toast.LENGTH_LONG).show();
+	    					Toast.LENGTH_SHORT).show();
 	    		}
 	    		finish();
 	    		break;	    		
@@ -158,8 +158,8 @@ public class QuasorFavoriteAilRemedyListActivity extends ListActivity{
         	
         	View view = convertView;
                 if (view == null) {
-                    LayoutInflater vi = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                    view = vi.inflate(R.layout.favoriteaillistview, null);
+                    LayoutInflater inflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                    view = inflater.inflate(R.layout.favoriteaillistview, null);
                 }
               
                 AilmentInfoBean ailmentInfoBeanObject = ailmentArray.get(position);

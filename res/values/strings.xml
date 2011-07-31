@@ -24,5 +24,5 @@ feedback: nssell.2009@gmail.com
     <string name="app_name">Quasor</string>
     <string name="main_list_name">Quasor Main List</string>
     <string name="remedy_screen">Quasor Remedy Description</string>
-    <string name="fontAlphabet"><u><b>A</b></u></string>    
+    <string name="fontAlphabet"><u><b>A</b></u></string>
 </resources>
