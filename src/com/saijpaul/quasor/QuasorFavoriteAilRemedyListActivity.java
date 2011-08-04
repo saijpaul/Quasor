@@ -86,6 +86,7 @@ public class QuasorFavoriteAilRemedyListActivity extends ListActivity{
 	    		finish();		
 	    		break;
 	    	case R.id.imageFavoriteRemove:
+	    		
 	    		boolean bRes = dbDAOObject.removeRemedyAsFavorite(removeResults);
 	    		if(bRes==true){
 	    			Toast.makeText(getApplicationContext(), "The selected remedy/remedies have been successfully removed from your favorite remedy list.", 
@@ -105,11 +106,11 @@ public class QuasorFavoriteAilRemedyListActivity extends ListActivity{
     
         getListView().setOnItemClickListener(new OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+            	textFilter.setText("");
             	AilmentInfoBean aInfo = (AilmentInfoBean)getListAdapter().getItem(position);
             	Intent msg = new Intent(QuasorFavoriteAilRemedyListActivity.this,QuasorRemedyDisplayActivity.class);
             	msg.putExtra(GlobalConstant.NUM_OF_AILMENT, aInfo.getAilmentNum());
-            	msg.putExtra(GlobalConstant.ALL_OR_FAVORITE, GlobalConstant.FAVORITE);
+            	msg.putExtra(GlobalConstant.ALL_OR_FAVORITE, GlobalConstant.FAVORITE);            	
             	QuasorFavoriteAilRemedyListActivity.this.startActivity(msg);
             }
           });

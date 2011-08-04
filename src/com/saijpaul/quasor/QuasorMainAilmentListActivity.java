@@ -48,6 +48,7 @@ public class QuasorMainAilmentListActivity extends ListActivity{
 	TextWatcher textFilterWatcher = null;
 	private ImageView shareRemedy;
 	private ImageView favoriteRemedyList;
+	private ImageView userSubmittedRemedyList;
 	
     @Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -59,10 +60,12 @@ public class QuasorMainAilmentListActivity extends ListActivity{
 	    this.filterImage = (ImageView)this.findViewById(R.id.imageOK);
 	    this.shareRemedy = (ImageView)this.findViewById(R.id.imageShareApp);
 	    this.favoriteRemedyList = (ImageView)this.findViewById(R.id.imageFavoriteFolder);
+	    this.userSubmittedRemedyList = (ImageView)this.findViewById(R.id.imageUserSubmittedRemedies);
 	    
 	    filterImage.setOnClickListener(clickListener);
 	    shareRemedy.setOnClickListener(clickListener);
 	    favoriteRemedyList.setOnClickListener(clickListener);
+	    userSubmittedRemedyList.setOnClickListener(clickListener);
 	    
 	    textFilter = (EditText) findViewById(R.id.searchbox);
 	    textFilter.addTextChangedListener(textFilterWatcher);
@@ -76,16 +79,23 @@ public class QuasorMainAilmentListActivity extends ListActivity{
 	    		InputMethodManager iMethodMgr = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
 	    		iMethodMgr.hideSoftInputFromWindow(textFilter.getWindowToken(), 0);
 	    		break;
-	    	case R.id.imageShareApp:	    		
+	    	case R.id.imageShareApp:	
+	    		textFilter.setText("");
 	    		Intent shareAppIntent = new Intent(Intent.ACTION_SEND);
 	    		shareAppIntent.setType("text/html");
 	    		shareAppIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Hey, Try this app regarding simple home remedies");
 	    		shareAppIntent.putExtra(android.content.Intent.EXTRA_TEXT, Html.fromHtml("<p>Try this app: [Market link]</p>"));
 	    		startActivity(Intent.createChooser(shareAppIntent,"Email to Family/Friend"));
 	    		break;
-	    	case R.id.imageFavoriteFolder:	    		
+	    	case R.id.imageFavoriteFolder:
+	    		textFilter.setText("");
 	    		Intent msg = new Intent(QuasorMainAilmentListActivity.this,QuasorFavoriteAilRemedyListActivity.class);
 	    		QuasorMainAilmentListActivity.this.startActivity(msg);
+	    		break;
+	    	case R.id.imageUserSubmittedRemedies:
+	    		textFilter.setText("");
+	    		Intent in = new Intent(QuasorMainAilmentListActivity.this,UserSubmittedRemedyListActivity.class);
+	    		QuasorMainAilmentListActivity.this.startActivity(in);
 	    		break;
 	    	}	
         }
@@ -98,8 +108,8 @@ public class QuasorMainAilmentListActivity extends ListActivity{
         getListView().setTextFilterEnabled(true);
        
         getListView().setOnItemClickListener(new OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            	
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {            	
+            	textFilter.setText("");
             	AilmentInfoBean infoBean = (AilmentInfoBean)getListAdapter().getItem(position);
             	int num = infoBean.getAilmentNum();
             	Intent msg = new Intent(QuasorMainAilmentListActivity.this,QuasorRemedyDisplayActivity.class);

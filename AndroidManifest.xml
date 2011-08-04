@@ -25,6 +25,8 @@ feedback: nssell.2009@gmail.com
       android:versionName="1.0">
     <uses-sdk android:minSdkVersion="8" />
 
+	<uses-permission android:name="android.permission.INTERNET" />
+
     <application android:icon="@drawable/icon" android:label="@string/app_name">
         <activity android:name=".QuasorInitialScreenActivity"
                   android:label="@string/app_name"
@@ -35,12 +37,21 @@ feedback: nssell.2009@gmail.com
             </intent-filter>
         </activity>
         <activity android:name=".QuasorMainAilmentListActivity"
-                  android:label="@string/main_list_name"
+                  android:label="@string/main_list_name" android:windowSoftInputMode="adjustPan"
                   android:theme="@android:style/Theme.NoTitleBar"/>
         <activity android:name=".QuasorRemedyDisplayActivity"
                   android:label="@string/remedy_screen"
                   android:theme="@android:style/Theme.NoTitleBar"/>
         <activity android:name=".QuasorFavoriteAilRemedyListActivity"
+                  android:label="@string/remedy_screen" android:windowSoftInputMode="adjustPan"
+                  android:theme="@android:style/Theme.NoTitleBar"/>
+        <activity android:name=".UserSubmittedRemedyListActivity"
+                  android:label="@string/remedy_screen"
+                  android:theme="@android:style/Theme.NoTitleBar"/>
+        <activity android:name=".UserSubmittedRemedyDisplayActivity"
+                  android:label="@string/remedy_screen"
+                  android:theme="@android:style/Theme.NoTitleBar"/>
+        <activity android:name=".QuasorFormToSubmitRemedyActivity"
                   android:label="@string/remedy_screen"
                   android:theme="@android:style/Theme.NoTitleBar"/>
     </application>

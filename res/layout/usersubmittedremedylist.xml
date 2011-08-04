@@ -40,18 +40,6 @@ feedback: nssell.2009@gmail.com
     android:layout_above="@+id/footerLayout"
     android:layout_below="@+id/headerLayout">
    
-   <TableRow android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/tableRow1"> 
-   <EditText android:id="@+id/searchbox" 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:maxLines="1" android:inputType="textNoSuggestions|textVisiblePassword"
-        android:width="240dip"/>
-   	<ImageView
-  	  android:id="@+id/imageOK"
-	  android:layout_width="54dip"
-	  android:layout_height="54dip"  android:paddingLeft="10dip"  android:src="@drawable/ok_big"/>
-	</TableRow>   
-   
    <ListView
         android:id="@android:id/list"
         android:layout_width="fill_parent"
@@ -65,9 +53,9 @@ feedback: nssell.2009@gmail.com
 
 		
 <ImageView
-  	  android:id="@+id/imageFavoriteRemove"
+  	  android:id="@+id/imageAddRemedy"
 	  android:layout_width="60dip"
-	  android:layout_height="60dip" android:src="@drawable/fav_rem" android:layout_alignParentRight="true" />
+	  android:layout_height="60dip" android:src="@drawable/addremedy" android:layout_alignParentRight="true" />
 						
 </RelativeLayout>
 

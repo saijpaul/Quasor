@@ -53,4 +53,22 @@ public class GlobalConstant {
 	public static final String ALL_OR_FAVORITE = "AllOrFavorite";
 	public static final String FAVORITE = "Favorite";
 	public static final String ALL = "All";
+	public static final String USER_SUBMITTED_AILMENT_LIST = "http://10.0.2.2/getAllAilment.php";
+	public static final String USER_SUBMITTED_REMEDY_DETAIL = "http://10.0.2.2/getAllRemedies.php";
+	public static final String PARSING_DATA_ERROR = "Error encountered in parsing of data";
+	public static final String USER_AILMENT_NAME = "userAilmentName";
+	public static final String USER_COLUMN_AILMENT_NAME = "ailmentName";
+	public static final String USER_COLUMN_AILMENT_NUM = "num";
+	public static final String USER_COLUMN_REMEDY_DESC = "remedyDescription";
+	public static final String USER_COLUMN_MODERATOR_APPROVAL = "moderatorApproval";
+	public static final String USER_COLUMN_SUBMITTED_BY = "submittedBy";    
+	public static final String aN_TO_FETCH_REMEDIES = "aN";
+	public static final String HTTP_CONNECTION_ERROR = "Error encountered in http connection";
+	public static final String CONVERSION_ERROR = "Error encountered in conversion";
+	public static final String SERVER_CLASS_NAME = "QuasorServerHelper";
+	public static final String AILMENT_NAME_TO_STORE_REMEDY = "ailmentN";
+	public static final String REMEDY_DESC_TO_STORE = "remedyD";
+	public static final String SUBMITTED_BY_USER_NAME_TO_STORE = "submittedBy";
+	public static final String DATA_STORAGE_TO_SERVER_ERROR = "Error in http connection or problem in inserting data in database ";
+	public static final String STORE_USER_SUBMITTED_REMEDY_DETAIL = "http://10.0.2.2/storeUsersRemedy.php";
 }

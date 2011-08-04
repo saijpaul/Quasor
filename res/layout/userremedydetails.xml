@@ -30,12 +30,6 @@ feedback: nssell.2009@gmail.com
 	  android:layout_width="50dip"
 	  android:layout_height="50dip"  android:src="@drawable/home" android:layout_alignParentLeft="true" />
 	  
-<ImageView
-  	  android:id="@+id/imageShareRemedy"
-	  android:layout_width="50dip"
-	  android:layout_height="50dip"  android:src="@drawable/mail" android:layout_alignParentRight="true" />
-	  
-
 </RelativeLayout>
 
 <LinearLayout 
@@ -44,34 +38,30 @@ feedback: nssell.2009@gmail.com
     android:orientation="vertical"
     android:layout_above="@+id/footerLayout"
     android:layout_below="@+id/headerLayout">
-  	
+
 <TextView android:text="TextView" android:textColor="#153435" android:id="@+id/ailmentNametextView" android:layout_width="wrap_content" 
-  android:layout_height="wrap_content" android:textSize="22dip"
-        android:typeface="sans" android:textStyle="bold"  android:gravity="center" android:paddingLeft="100dip"/>
-  
-<ImageView android:src="@drawable/imagenotfound" android:id="@+id/remedyimageView" android:layout_height="wrap_content" 
-  android:layout_width="wrap_content"/>
-  
-<TableRow android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/tableRow1">
+  android:layout_height="wrap_content" android:textSize="22dip" android:layout_alignParentLeft="true"
+  android:typeface="sans" android:textStyle="bold" />
+    	
+<TableRow android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/tableRow1">
   
   <TextView android:text="@string/fontAlphabet"  android:id="@+id/smalltextView" android:layout_width="wrap_content" 
   android:layout_height="wrap_content" android:textAppearance="?android:attr/textAppearanceSmall" android:textColor="#153435"
-  android:clickable="true" android:includeFontPadding="true" android:layout_marginLeft="210dip"/>
+  android:clickable="true" android:includeFontPadding="true" android:layout_marginLeft="260dip"/>
   <TextView android:text="@string/fontAlphabet"  android:clickable="true"  android:includeFontPadding="true" android:textColor="#153435"
-  android:id="@+id/mediumtextView" android:layout_width="wrap_content" android:layout_marginLeft="20dip"
-  android:layout_height="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium"
-  />
+  android:id="@+id/mediumtextView" android:layout_width="wrap_content" android:layout_marginLeft="10dip"
+  android:layout_height="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium"/>
   <TextView android:text="@string/fontAlphabet" android:id="@+id/largetextView" android:includeFontPadding="true" android:textColor="#153435"
-  android:clickable="true" android:textAppearance="?android:attr/textAppearanceLarge" android:layout_width="wrap_content"
-  android:layout_height="wrap_content" android:layout_marginLeft="20dip"/>
+  android:clickable="true" android:textAppearance="?android:attr/textAppearanceLarge" android:layout_width="wrap_content" 
+  android:layout_height="wrap_content" android:layout_marginLeft="10dip"/>
   
-  </TableRow>
-    
+</TableRow>
+
 <ScrollView
   xmlns:android="http://schemas.android.com/apk/res/android"
   android:orientation="vertical"
-  android:layout_width="match_parent"
-  android:layout_height="match_parent"
+  android:layout_width="wrap_content"
+  android:layout_height="wrap_content"
   android:layout_marginBottom="20dip" >
 
 <TextView android:text="TextView" android:id="@+id/remedyDesctextView" android:layout_width="wrap_content" 
@@ -80,6 +70,7 @@ feedback: nssell.2009@gmail.com
   />
   
 </ScrollView>
+
 </LinearLayout>
 <RelativeLayout android:id="@+id/footerLayout" android:layout_height="wrap_content" android:background="@drawable/footer" 
 				android:padding="8dip" android:paddingBottom="8dip" android:paddingLeft="8dip" android:paddingRight="8dip" 
@@ -89,11 +80,6 @@ feedback: nssell.2009@gmail.com
   	  android:id="@+id/imageNext"
 	  android:layout_width="50dip"
 	  android:layout_height="50dip" android:src="@drawable/right" android:layout_alignParentRight="true" />
-
-<ImageView
-  	  android:id="@+id/imageFavoriteAdd"
-	  android:layout_width="50dip"
-	  android:layout_height="50dip" android:src="@drawable/fav_add" android:layout_centerHorizontal="true" />
 
 <ImageView
   	  android:id="@+id/imagePrevious"

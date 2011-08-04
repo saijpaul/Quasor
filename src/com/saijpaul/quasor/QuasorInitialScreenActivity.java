@@ -57,7 +57,7 @@ public class QuasorInitialScreenActivity extends Activity {
 	        	msg.putExtra(GlobalConstant.AILMENT_ARRAY, result);
 
 	        	AlertDialog.Builder disclaimerMessage;
-	        	AlertDialog alertDialog;
+	        	final AlertDialog alertDialog;
 	        
 	        	LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
 	        	View layout = inflater.inflate(R.layout.disclaimerdialog,null);
@@ -67,28 +67,30 @@ public class QuasorInitialScreenActivity extends Activity {
 	        	Button agreeButton = (Button) layout.findViewById(R.id.agreebt);
 	        	Button disagreeButton = (Button) layout.findViewById(R.id.disagreebt);
 	        	agreeButton.setText(GlobalConstant.ACCEPT_BUTTON_TEXT);
-	        	disagreeButton.setText(GlobalConstant.DECLINE_BUTTON_TEXT);
+	        	disagreeButton.setText(GlobalConstant.DECLINE_BUTTON_TEXT);	        	
+	        	disclaimerMessage = new AlertDialog.Builder(QuasorInitialScreenActivity.this);
+	        	disclaimerMessage.setView(layout);
+	        	alertDialog = disclaimerMessage.create();
+	        	alertDialog.getWindow().setLayout(80, 50);
+	        	alertDialog.show();
 	        		            
 	        	agreeButton.setOnClickListener(new OnClickListener(){
 							@Override
 							public void onClick(View v) {
 								QuasorInitialScreenActivity.this.startActivity(msg);
-			                	 QuasorInitialScreenActivity.this.finish();								
+								alertDialog.dismiss();
+			                	QuasorInitialScreenActivity.this.finish();								
 							}	        		
 	        	});
 	        	
 	        	disagreeButton.setOnClickListener(new OnClickListener(){
 	        				@Override
 							public void onClick(View v) {
+	        					 alertDialog.dismiss();
 					           	 QuasorInitialScreenActivity.this.finish();								
 							}      		
 	        	});
-
-	        	disclaimerMessage = new AlertDialog.Builder(QuasorInitialScreenActivity.this);
-	        	disclaimerMessage.setView(layout);
-	        	alertDialog = disclaimerMessage.create();
-	        	alertDialog.getWindow().setLayout(80, 50);
-	        	alertDialog.show();
+	        	
 		    }		
 	    }	    	    
 }
