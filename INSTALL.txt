@@ -76,10 +76,19 @@ project folder, click on Run As --> Android application. This should result in a
 FOR END USERS WITH ANDROID SDK FOR RUNNING APP ON EMULATOR:
 -----------------------------------------------------------
 
-1. Download the .apk file of the application. You should have also downloaded android sdk. Now press
-window+R, type cmd.
+1. For complete instruction on system requirements, installing Android SDK,Please look at the below link:
 
-Once black window opens, you need to go inside the directory where platform-tools is present.
+http://developer.android.com/sdk/installing.html#components
+
+2. For complete instruction on creating Android Virtual Device to launch Emulator,Please look at the below link:
+
+http://developer.android.com/resources/tutorials/hello-world.html
+
+3. Download the .apk file of the application named "Quasor.apk" from the below link:
+
+https://github.com/saijpaul/Quasor
+
+Now press window+R, type cmd. Once black window opens, you need to go inside the directory where platform-tools is present.
 
 C:\<Path to platform-tools folder which is inside you android sdk folder>\platform-tools> 
 
@@ -104,15 +113,20 @@ not published yet.I will update the document as soon as it is published.
 FOR END USERS WITH ANDROID SDK FOR RUNNING APP ON PHONE:
 --------------------------------------------------------
 
+1. For complete instruction on system requirements, installing Android SDK,Please look at the below link:
+
+http://developer.android.com/sdk/installing.html#components
+
 Incase of running the app on Phone directly, you will need 2 things: USB cable to connect to the Phone & Google USB Driver Version 4. 
 Note: Google's USB Driver can be updated through Android SDK Manager->available packages->Third Party Add-ons->Google USB Driver. 
 
-1. Connect the USB cable to the Computer and if Google USB Driver is installed correctly then you should see the Phone name in the taskbar.
+2. Connect the USB cable to the Computer and if Google USB Driver is installed correctly then you should see the Phone name in the taskbar.
 
-2. Download the .apk file of the application. You should have also downloaded android sdk. Now press
-window+R, type cmd.
+3. Download the .apk file of the application named "Quasor.apk" from the below link:
 
-Once black window opens, you need to go inside the directory where platform-tools is present.
+https://github.com/saijpaul/Quasor
+
+Now press window+R, type cmd.Once black window opens, you need to go inside the directory where platform-tools is present.
 
 C:\<Path to platform-tools folder which is inside you android sdk folder>\platform-tools> 
 
@@ -125,7 +139,7 @@ b343433453335dfdfddf233   device
 
 You should see a line similar to above indicating that the Adb has detected the phone.
 
-3. If Step 2 succeeds then type the below command:
+4. If Step 3 succeeds then type the below command:
 
 adb install <Path where you have stored the downloaded .apk file>
 

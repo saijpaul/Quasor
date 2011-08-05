@@ -21,8 +21,7 @@ Description of the project:
 QUASOR is built with the motivation of educating the end users with natural recipes 
 that are made with Organic ingredients and can be used to treat/cure common ailments 
 such as cold, headache , acne etc. The materials are common household wisdom in 
-various parts of the world but the ingredients may or may be found in your place. 
-the world.
+various parts of the world but the ingredients may or may be found in your place.
 
 DISCLAIMER: This Application is built for educational/informational purposes												only and Author takes no responsibility for any of the content in the application
 and is no way responsible for any impact caused physically or otherwise to the end
@@ -67,8 +66,8 @@ Future Enhancements
  -For user submitted functionality, need to publish the server application.
 
 NOTE: The application is still under testing phase so please let me know through email on email address 
-provided above if some feature from currently working list is not working for you.User submitted remedies 
-feature won't be accessible to users as server needed for same is not yet published.
+provided above if some feature from currently working list is not working for you.
+User submitted remedies feature won't be accessible to users as server needed for same is not yet published.
 
 Platform:
 ---------
@@ -131,8 +130,7 @@ and conditions located at: https://github.com/saijpaul/Quasor
 
 Attributions:
 -------------
-I am very grateful to all the people who have done the hardwork to create images & code samples and providing 
-it for use by others.
+I am very grateful to all the people who have done the hardwork to create images & write code samples.
 
 For images:
 
@@ -169,6 +167,3 @@ FOR CODE SAMPLES:
 http://developer.android.com/index.html
 http://www.helloandroid.com/tutorials/connecting-mysql-database
 http://www.reigndesign.com/blog/using-your-own-sqlite-database-in-android-applications/
-
-
-
