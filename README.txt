@@ -64,7 +64,7 @@ Future Enhancements
  -Login facility so that users can only enter their remedy if they are registered users inorder to 
   reduce spam.
  -Right now, application runs with dummy content, need to update remedy content.
- -For user submitted functionality, need to publish the application server through <----->
+ -For user submitted functionality, need to publish the server application.
 
 NOTE: The application is still under testing phase so please let me know through email on email address 
 provided above if some feature from currently working list is not working for you.User submitted remedies 
