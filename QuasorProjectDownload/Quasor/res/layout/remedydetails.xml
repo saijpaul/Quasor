@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+Copyright(c) 2011 Seema Saijpaul 
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+Author: Seema Saijpaul
+feedback: nssell.2009@gmail.com
+-->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+				android:id="@+id/relativeLayoutMain" android:layout_width="fill_parent" 
+				android:layout_height="fill_parent" android:gravity="fill"
+				android:background="@drawable/back">
+<RelativeLayout android:id="@+id/headerLayout" android:layout_height="wrap_content" android:background="@drawable/header" 
+				android:padding="8dip" android:paddingBottom="8dip" android:paddingLeft="8dip" android:paddingRight="8dip" 
+				android:paddingTop="8dip" android:layout_width="wrap_content" android:layout_alignParentTop="true">
+<ImageView
+  	  android:id="@+id/imageHome"
+	  android:layout_width="50dip"
+	  android:layout_height="50dip"  android:src="@drawable/home" android:layout_alignParentLeft="true" />
+	  
+<ImageView
+  	  android:id="@+id/imageShareRemedy"
+	  android:layout_width="50dip"
+	  android:layout_height="50dip"  android:src="@drawable/mail" android:layout_alignParentRight="true" />
+	  
+
+</RelativeLayout>
+
+<LinearLayout 
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:layout_above="@+id/footerLayout"
+    android:layout_below="@+id/headerLayout">
+  	
+<TextView android:text="TextView" android:textColor="#153435" android:id="@+id/ailmentNametextView" android:layout_width="wrap_content" 
+  android:layout_height="wrap_content" android:textSize="22dip"
+        android:typeface="sans" android:textStyle="bold"  android:gravity="center" android:paddingLeft="100dip"/>
+  
+<ImageView android:src="@drawable/imagenotfound" android:id="@+id/remedyimageView" android:layout_height="wrap_content" 
+  android:layout_width="wrap_content"/>
+  
+<TableRow android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/tableRow1">
+  
+  <TextView android:text="@string/fontAlphabet"  android:id="@+id/smalltextView" android:layout_width="wrap_content" 
+  android:layout_height="wrap_content" android:textAppearance="?android:attr/textAppearanceSmall" android:textColor="#153435"
+  android:clickable="true" android:includeFontPadding="true" android:layout_marginLeft="210dip"/>
+  <TextView android:text="@string/fontAlphabet"  android:clickable="true"  android:includeFontPadding="true" android:textColor="#153435"
+  android:id="@+id/mediumtextView" android:layout_width="wrap_content" android:layout_marginLeft="20dip"
+  android:layout_height="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium"
+  />
+  <TextView android:text="@string/fontAlphabet" android:id="@+id/largetextView" android:includeFontPadding="true" android:textColor="#153435"
+  android:clickable="true" android:textAppearance="?android:attr/textAppearanceLarge" android:layout_width="wrap_content"
+  android:layout_height="wrap_content" android:layout_marginLeft="20dip"/>
+  
+  </TableRow>
+    
+<ScrollView
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:orientation="vertical"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:layout_marginBottom="20dip" >
+
+<TextView android:text="TextView" android:id="@+id/remedyDesctextView" android:layout_width="wrap_content" 
+  android:layout_height="wrap_content" android:isScrollContainer="true" android:scrollbars="vertical" 
+  android:scrollbarAlwaysDrawVerticalTrack="true" android:scrollbarStyle="insideInset" android:textColor="#153435"
+  />
+  
+</ScrollView>
+</LinearLayout>
+<RelativeLayout android:id="@+id/footerLayout" android:layout_height="wrap_content" android:background="@drawable/footer" 
+				android:padding="8dip" android:paddingBottom="8dip" android:paddingLeft="8dip" android:paddingRight="8dip" 
+				android:paddingTop="8dip" android:layout_width="wrap_content" android:layout_alignParentBottom="true">
+
+<ImageView
+  	  android:id="@+id/imageNext"
+	  android:layout_width="50dip"
+	  android:layout_height="50dip" android:src="@drawable/right" android:layout_alignParentRight="true" />
+
+<ImageView
+  	  android:id="@+id/imageFavoriteAdd"
+	  android:layout_width="50dip"
+	  android:layout_height="50dip" android:src="@drawable/fav_add" android:layout_centerHorizontal="true" />
+
+<ImageView
+  	  android:id="@+id/imagePrevious"
+	  android:layout_width="50dip"
+	  android:layout_height="50dip" android:src="@drawable/left" android:layout_alignParentLeft="true" />
+		
+</RelativeLayout>
+</RelativeLayout>

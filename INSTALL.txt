@@ -1,0 +1,177 @@
+/*******************************************************************
+* Copyright© 2011 Seema Saijpaul 
+* This program is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details. You should have
+* received a copy of the GNU General Public License along with this program. 
+* If not, see <http://www.gnu.org/licenses/>.
+
+* Author: Seema Saijpaul
+* Feedback: nssell.2009@gmail.com
+*******************************************************************/
+
+Instructions to Install the application:
+---------------------------------------
+
+This application is not yet published in android market. I still need to perform more rigrious 
+testing along with addition of some features before this app is ready to be published in the market.
+
+FOR DEVELOPER USING ECLIPSE IDE:
+--------------------------------
+
+1. For complete instruction on system requirements, installing Android SDK and ADT Plugin with IDE,Please look at the below link:
+
+http://developer.android.com/sdk/installing.html#components
+
+2. For complete instruction on creating Android Virtual Device to launch Emulator,Please look at the below link:
+
+http://developer.android.com/resources/tutorials/hello-world.html
+
+3. After installing Android SDK, Emulator and ADT Plugin with IDE you can download the source code 
+of the application located in a folder called "Quasor" located in "QuasorProjectDownload" folder from the below link:
+
+https://github.com/saijpaul/Quasor
+
+4. Now, create an android project using Select File > Import > existing projects > select Quasor
+
+You would also require to build a local database using the following instructions:
+
+   (a)Open adb and run "adb shell" to get remote shell access
+   (b)Create a folder called "databases" under /data/data/com.saijpaul.quasor/
+   (c)exit
+
+After you have successfully created a folder named "databases" you need to copy-paste the QuasorDB.db
+file from asset folder(present in project source code) under the newly created "databases" folder. 
+
+For transferring QuasorDB.db under "databases" folder,launch your emulator(having same platform as that of your application,
+in this application's case it is 2.2).Once emulator is started, go to windows->open perspective->
+DDMS->File Explorer window->data->data->databases.
+
+For pushing the databases file under "databases" folder click on "Push a file onto the device" option in top 
+right corner of file explorer window.
+
+2.) For user submitted remedies functionality, download the server code located in folder "QuasorServerSideCode" from below location:
+
+https://github.com/saijpaul/Quasor  
+
+To build remote database on server, you would require to install Apache server, MySQL database(Please look Below for the SQL 
+creation Scripts*) and PHP 5.1. Services Apache and MySQL must be started for this functionality to work properly.
+
+Inorder to install all of the above and configure your apache server to locate your project server code(php files),
+please look at the below link:
+
+http://www.php-mysql-tutorial.com/wikis/php-tutorial/installing-php-and-mysql.aspx
+
+
+Now you application set up is complete and you can run the application in emulator by right-clicking on the
+project folder, click on Run As --> Android application. This should result in application being launched automatically on the emulator.
+
+
+FOR END USERS WITH ANDROID SDK FOR RUNNING APP ON EMULATOR:
+-----------------------------------------------------------
+
+1. Download the .apk file of the application. You should have also downloaded android sdk. Now press
+window+R, type cmd.
+
+Once black window opens, you need to go inside the directory where platform-tools is present.
+
+C:\<Path to platform-tools folder which is inside you android sdk folder>\platform-tools> 
+
+Once you are inside that directory, type the following command: 
+
+adb install <Path where you have stored the downloaded .apk file>
+
+Press enter, you would be able to see information like below:
+
+191 KB/s (320483 bytes in 1.635s)
+        pkg: /data/local/tmp/Quasor.apk
+
+Success
+
+Once you get message of Success, your installation is complete and you can start using the application.
+
+
+NOTE: For user submitted remedies functionality of the application you will not be able to test it right now as the server side is 
+not published yet.I will update the document as soon as it is published.
+
+
+FOR END USERS WITH ANDROID SDK FOR RUNNING APP ON PHONE:
+--------------------------------------------------------
+
+Incase of running the app on Phone directly, you will need 2 things: USB cable to connect to the Phone & Google USB Driver Version 4. 
+Note: Google's USB Driver can be updated through Android SDK Manager->available packages->Third Party Add-ons->Google USB Driver. 
+
+1. Connect the USB cable to the Computer and if Google USB Driver is installed correctly then you should see the Phone name in the taskbar.
+
+2. Download the .apk file of the application. You should have also downloaded android sdk. Now press
+window+R, type cmd.
+
+Once black window opens, you need to go inside the directory where platform-tools is present.
+
+C:\<Path to platform-tools folder which is inside you android sdk folder>\platform-tools> 
+
+Once you are inside that directory, type the following command: 
+
+adb devices (Press enter)
+
+List of devices attached
+b343433453335dfdfddf233   device
+
+You should see a line similar to above indicating that the Adb has detected the phone.
+
+3. If Step 2 succeeds then type the below command:
+
+adb install <Path where you have stored the downloaded .apk file>
+
+Press enter, you would be able to see information like below:
+
+191 KB/s (320483 bytes in 1.635s)
+        pkg: /data/local/tmp/Quasor.apk
+
+Success
+
+Once you get message of Success, your installation is complete and you can start using the application.
+
+
+NOTE: For user submitted remedies functionality of the application you will not be able to test it right now as the server side is 
+not published yet.I will update the document as soon as it is published.
+
+FOR END USERS WITHOUT ANDROID SDK FOR RUNNING APP ON PHONE:
+-----------------------------------------------------------
+
+Please follow the instructions provided in following tutorials:
+
+http://getfreeapplication.blogspot.com/2011/05/android-tips-how-to-install-apk-file-on.html
+
+http://www.talkandroid.com/guides/install-apk-files-on-android/
+
+
+NOTE: For user submitted remedies functionality of the application you will not be able to test it right now as the server side is 
+not published yet.I will update the document as soon as it is published.
+
+-----------------------------------------------------------------------------------------------------------------------------------
+
+*REMOTE MYSQL Database Script:
+----------------------------
+
+CREATE TABLE ailment_user_remedy (
+    num int unsigned NOT NULL AUTO_INCREMENT primary key, 
+    ailmentName varchar(30), 
+    remedyDescription MEDIUMTEXT NOT NULL, 
+    moderatorApproval ENUM('Y','N') NOT NULL default 'N', 
+    submittedBy varchar(30)
+);
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+FOR EMAIL SENDING FUNCTIONALITY TO WORK:
+
+a) Configure you default email client on you android emulator to be able to send emails.
+For example: Gmail configurations can be done as shown in the link: https://mail.google.com/support/bin/answer.py?answer=13287
+-----------------------------------------------------------------------------------------------------------------------------------

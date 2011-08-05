@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+Copyright(c) 2011 Seema Saijpaul 
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+Author: Seema Saijpaul
+feedback: nssell.2009@gmail.com
+-->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+				android:id="@+id/relativeLayoutMain" android:layout_width="fill_parent" 
+				android:layout_height="fill_parent" android:gravity="fill"
+				android:background="@drawable/back">
+<RelativeLayout android:id="@+id/headerLayout" android:layout_height="wrap_content" android:background="@drawable/header" 
+				android:padding="8dip" android:paddingBottom="8dip" android:paddingLeft="8dip" android:paddingRight="8dip" 
+				android:paddingTop="8dip" android:layout_width="wrap_content" android:layout_alignParentTop="true">
+</RelativeLayout>
+<LinearLayout 
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:layout_above="@+id/footerLayout"
+    android:layout_below="@+id/headerLayout">
+   
+   <TableRow android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/tableRow1"> 
+   <EditText android:id="@+id/searchbox" 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxLines="1" android:inputType="textNoSuggestions|textVisiblePassword"
+        android:width="240dip"/>
+   	<ImageView
+  	  android:id="@+id/imageOK"
+	  android:layout_width="54dip"
+	  android:layout_height="54dip"  android:paddingLeft="10dip"  android:src="@drawable/ok_big"/>
+
+	</TableRow>
+   
+   
+   <ListView
+        android:id="@android:id/list"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+    />  
+    
+</LinearLayout>
+<RelativeLayout android:id="@+id/footerLayout" android:layout_height="wrap_content" android:background="@drawable/footer" 
+				android:padding="8dip" android:paddingBottom="8dip" android:paddingLeft="8dip" android:paddingRight="8dip" 
+				android:paddingTop="8dip" android:layout_width="wrap_content" android:layout_alignParentBottom="true">
+
+<ImageView
+  	  android:id="@+id/imageUserSubmittedRemedies"
+	  android:layout_width="60dip"
+	  android:layout_height="60dip"  android:src="@drawable/usersubmittedremedies" android:layout_alignParentLeft="true" />
+
+<ImageView
+  	  android:id="@+id/imageFavoriteFolder"
+	  android:layout_width="60dip"
+	  android:layout_height="60dip" android:src="@drawable/fav" android:layout_centerHorizontal="true" />
+
+<ImageView
+  	  android:id="@+id/imageShareApp"
+	  android:layout_width="60dip"
+	  android:layout_height="60dip"  android:src="@drawable/mail" android:layout_alignParentRight="true" />
+		
+</RelativeLayout>
+</RelativeLayout>
